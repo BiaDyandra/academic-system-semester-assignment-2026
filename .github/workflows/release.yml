@@ -20,16 +20,37 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
+      # PASSO NOVO: Converte o nome do usuário/repositório para minúsculas
+      - name: Converter nome do repositório para minúsculas
+        run: |
+          echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
+      - name: Fazer login no GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build e testes
         run: mvn clean verify --no-transfer-progress
         working-directory: academic-system
 
       - name: Empacotar JAR
         run: mvn package -DskipTests --no-transfer-progress
+        working-directory: academic-system
+
+      # PASSO CORRIGIDO: Agora usa a variável env.REPO_LC em letras minúsculas
+      - name: Construir e enviar imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: ./academic-system
+          push: true
+          tags: ghcr.io/${{ env.REPO_LC }}:latest
 
       - name: Criar release no GitHub
         uses: softprops/action-gh-release@v1
         with:
-          files: target/*.jar
+          files: academic-system/target/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
