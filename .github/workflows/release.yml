@@ -22,6 +22,7 @@ jobs:
 
       - name: Build e testes
         run: mvn clean verify --no-transfer-progress
+        working-directory: academic-system
 
       - name: Empacotar JAR
         run: mvn package -DskipTests --no-transfer-progress
