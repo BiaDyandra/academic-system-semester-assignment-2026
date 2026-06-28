@@ -21,3 +21,4 @@ jobs:
 
       - name: Validar build e testes
         run: mvn clean verify --no-transfer-progress
+        working-directory: academic-system
