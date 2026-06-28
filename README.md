@@ -20,7 +20,7 @@ O sistema suporta o gerenciamento de turmas e avaliações acadêmicas, exercita
 |------|--------|
 | Bianca Dyandra | [@BiaDyandra](https://github.com/BiaDyandra) |
 | Gabriela Mazon | [@Gabriela-Mazon](https://github.com/Gabriela-Mazon) |
-| Leticia Santos | [@LuthorW](https://github.com/LuthorW) |
+| Leticia Alves | [@LuthorW](https://github.com/LuthorW) |
 | Isabela Mageste | [@Isabela-Mageste](https://github.com/Isabela-Mageste) |
 
 ---
