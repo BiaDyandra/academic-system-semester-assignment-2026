@@ -23,6 +23,7 @@ jobs:
 
       - name: Build e testes com Maven
         run: mvn clean verify --no-transfer-progress
+        working-directory: academic-system
 
       # TUS-2416: publicar relatorio de cobertura
       - name: Publicar relatorio de cobertura
