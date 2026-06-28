@@ -5,6 +5,11 @@ on:
   push:
     branches: [ main ]
 
+# ADICIONE ESSE BLOCO AQUI PARA LIBERAR A ESCRITA DO DOCKER
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -19,7 +24,6 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      # PASSO NOVO: Captura o nome do repositório e transforma em minúsculas
       - name: Converter nome do repositório para minúsculas
         run: |
           echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
@@ -35,7 +39,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # PASSO CORRIGIDO: Agora aponta para a pasta correta e usa as tags em minúsculas
       - name: Build e push da imagem Docker
         uses: docker/build-push-action@v5
         with:
